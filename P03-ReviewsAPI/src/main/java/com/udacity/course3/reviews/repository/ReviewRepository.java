@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
-  @Query("select title from Review where product=:id")
-  List<String> findAllByProductId(int id);
+  @Query("select new Review(id, title, content) from Review where product.productName=:productName")
+  List<Review> findAllByProductName(String productName);
 
   List<Review> findAllByProduct(Product product);
 }

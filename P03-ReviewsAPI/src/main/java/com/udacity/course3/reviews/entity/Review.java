@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,5 +30,12 @@ public class Review {
   private Product product;
 
   @OneToMany(mappedBy = "review")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private List<Comment> comments;
+
+  public Review(int id, String title, String content) {
+    this.id = id;
+    this.title = title;
+    this.content = content;
+  }
 }
